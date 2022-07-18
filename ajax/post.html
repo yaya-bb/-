@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>post</title>
+</head>
+<style>
+    #box{
+        width: 200px;
+        height: 200px;
+        border: solid 1px #ccc;
+    }
+</style>
+<body>
+    <div id="box"></div>
+</body>
+<script>
+    //获取button元素
+    const box = document.getElementById("box");
+    box.addEventListener("mouseover",function(){
+    //创建对象 xhr 就是ajax
+    const xhr = new XMLHttpRequest();
+    //2.初始化 设置请求方法和url
+    xhr.open('POST', 'http://127.0.0.1:8000/server');
+    xhr.setRequestHeader('Content-Type','application/X-www-form-urlencoded');
+    //3.发送
+    xhr.send('a = 100& b = 200 & c = 300');
+    //4.事件的绑定 处理服务端返回的结果
+    //on = when 当..时候
+    //readystate 是xhr对象中的属性，表示状态 0 1 2 3 4
+    //0表示未初始化；1表示open方法已调用完毕 2表示send方法已调用完毕 3表示服务端返回了部分结果 4表示服务端返回了全部结果
+
+        xhr.onreadystatechange = function(){
+        //判断（服务端返回了所有的结果）
+        if(xhr.readyState === 4)
+        //判断相应状态码 200 404 403 401 500
+        {
+            //2xx 成功
+            if(xhr.status >= 200 && xhr.status < 300)
+            {
+                //处理结果 行 头 空行 体
+                //1.相应行
+                // console.log(xhr.status);//相应行中的状态码
+                // console.log(xhr.responseText);//相应行中的状态字符串
+                // console.log(xhr.getAllResponseHeaders());//所有的响应头
+                // console.log(xhr.response);//配置参数，相应体
+                //设置box的文本
+                box.innerHTML = xhr.response;
+            }
+        }
+    }
+})
+</script>
+</html>
