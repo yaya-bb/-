@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>初始Vue</title>
+    <!-- 初始Vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <!-- <script type="text/javascript" src="./js/vue.js"></script> -->
+</head>
+<body>
+    <div id="app">
+        <h1>
+        {{ message }}
+        </h1>
+         <h2 v-html="content"></h2>
+         <p>{{major.institute}}</p><!-- {{}}模板语法 -->
+         <br>
+         <!-- v-text设置文本值 -->
+         <p v-text="major[0]"></p>
+         <h4 v-on:click="change">{{add}}</h4>
+    </div>
+    <script type="text/javascript">
+        Vue.config.productionTip = false;//以阻止 vue 在启动时生成生产提示
+
+        //创建Vue实例
+        const x = new Vue({
+            el:"#app", //el用于指定Vue实例为哪个容器服务，值通常为CSS选择器字符串
+            //data中用于存储数据，数据供el指定的容器使用
+            data:{
+                message:"欢迎来到大学！",
+                school:{
+                    name:"广州新华学院",
+                    institute:"信息与智能工程学院"
+                },
+                major:['计算机科学与技术','软件工程'],
+                content:"<a href='#'>广州新华学院</a>",
+                add:"计算机科学与技术"
+            },
+            methods: {
+                    change:function(){
+                        this.add += "-前端开发"
+                    }
+                },
+        })
+    </script>
+        
+        
+        
+
+
+</body>
+</html>
