@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全局组件component</title>
+</head>
+<body>
+    <div id="root">
+        <div>
+            <input type="text" v-model="todoValue">
+            <button @click="handleBtnClick">提交</button>
+        </div>
+        <ul>
+            <todo-item v-bind:content="item"
+                       v-bind:index="index"
+                       v-for="(item,index) in list"
+                       @delete="handleItemDelete">
+            </todo-item>
+            <!-- 需要放在root里面 -->
+        </ul>        
+
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+    //创建全局组件
+    // Vue.component("TodoItem",{
+    //     props:["content"],//用来接收外部传进来的数据
+    //     template:"<li>{{content}}</li>",
+    // })
+    var TodoItem ={
+        props:['content',"index"],
+        //子组件想接受下标就必须接受这个下标
+        template:"<li @click='handleItemClick'>{{content}}</li>",
+        // 需把handleItemClick写在子组件methods方法之中
+        methods:{
+            handleItemClick:function(){
+                this.$emit("delete",this.index);
+                // $emit触发父组件的自定义事件
+            }
+        }
+
+    }
+    var app = new Vue({
+        el:"#root",
+        data:{
+            todoValue:"",
+            list:[]
+        },
+        components:{
+            TodoItem:TodoItem,
+            // 局部创建的组件需注册到Vue中
+        },
+        methods:{
+            handleBtnClick:function(){
+                this.list.push(this.todoValue);
+                this.todoValue = "";
+            },
+            handleItemDelete:function(index){
+                this.list.splice(index,1);
+            }
+        }
+
+    })
+</script>
+</html>
