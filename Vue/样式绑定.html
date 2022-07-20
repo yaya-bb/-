@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>样式绑定</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 用style样式绑定 -->
+        <!-- <div :style="[styleObj,{fontsize:'90px'}]">Hello</div> -->
+        <!-- 用class对象/数组绑定 -->
+        <!-- 1.class对象绑定 -->
+        <!-- <div @click="handleDivClick"
+             :class ="{actived:isActived}">Hello</div> -->
+        <!-- 2.用class数组绑定 -->
+        <div @click="handleDivClick"
+            :class="[activated]">Hello</div>
+        <!-- v-if、v-else-if、v-else必须紧密连在一起 -->
+        <div v-if="show==='a'">This is a.</div>
+        <div v-else-if="show==='b'">This is b.</div>
+        <div v-else>This is others.</div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data:{
+            // styleObj:{
+            //     color: 'red',
+            // }
+            // isActived:false,
+            activated:"",
+            show:"a",
+        },
+        methods:{
+            handleDivClick:function(){
+                // this.isActived = !this.isActived;
+                this.activated= this.activated === "activated" ? " " : "activated";
+            }
+        }
+    })
+</script>
+</html>
