@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue中的插槽</title>
+</head>
+<body>
+    <div id="body-content">
+        <node>
+            <!-- <div slot="header">header</div> -->
+            <!-- 若没有出现已定义的插槽，则会输出默认值 -->
+            <div slot="message">message</div>
+        </node>
+
+
+    </div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+    Vue.component('node',
+    {
+        template: `<div>
+                   <slot name="header"><h1>default</h1></slot>
+                   <slot name="message"></slot>
+                    </div>`
+                    //由div包裹的插槽式
+                })
+    var app = new Vue({
+        el: '#body-content',
+
+    });
+</script>
+</html>
