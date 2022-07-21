@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue作用域插槽</title>
+</head>
+<body>
+    <div id="vm">
+        <child>
+            <template slot-scope="props"><h4>{{props.item}}</h4></template>
+        </child>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+    Vue.component('child',{
+        data:function(){
+           // return{
+            list:[1,2,3,4]
+            
+        },
+        template: `<div>
+                   <ul>
+                    <slot v-for="item of list"
+                          :item = item>
+                        // 传入item进去
+                    </slot>
+                    </ul>
+                    </div>`
+    })
+    var vn =new Vue({
+        el: '#vm',
+    });
+</script>
+</html>
