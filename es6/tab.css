@@ -1,0 +1,132 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+ 
+li {
+    list-style: none;
+}
+ 
+main {
+    margin: 100px auto;
+}
+ 
+h4 {
+    font-size: 20px;
+    text-align: center;
+}
+ 
+.tabbox {
+    position: relative;
+    margin: 40px auto;
+    width: 900px;
+    border: 1px solid orangered;
+}
+ 
+.firstnav {
+    position: relative;
+    height: 50px;
+    padding: 0;
+}
+ 
+.firstnav ul {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+ 
+.firstnav ul li {
+    position: relative;
+    float: left;
+    width: 80px;
+    height: 50px;
+    padding: 0 10px;
+    font-size: 16px;
+    text-align: center;
+    list-style: none;
+    border-right: 1px solid #999;
+}
+ 
+.firstnav ul li span:first-child {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+}
+ 
+.firstnav ul li span:first-child input {
+    padding: 0 2px;
+    width: 72px;
+    height: 30px;
+    border: 2px solid skyblue;
+    outline-color: skyblue;
+}
+ 
+.firstnav .liactive {
+    border-bottom: 1px solid #fff;
+}
+ 
+.firstnav ul li .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 10px;
+    height: 10px;
+    line-height: 8px;
+    font-size: 8px;
+    color: #fff;
+    background-color: #000;
+    border-bottom-left-radius: 10px;
+    cursor: pointer;
+}
+ 
+.firstnav ul li .close i {
+    display: block;
+    font-style: normal;
+    transform: rotate(45deg);
+}
+ 
+.tabadd {
+    position: absolute;
+    right: 10px;
+    top: 15px;
+    width: 15px;
+    height: 15px;
+    text-align: center;
+    border: 1px solid #999;
+    cursor: pointer;
+}
+ 
+.tabadd span {
+    display: block;
+    width: 15px;
+    height: 15px;
+    color: #666;
+    line-height: 12px;
+}
+ 
+.tabscon {
+    height: 300px;
+    padding: 20px;
+    border-top: 1px solid #999;
+}
+ 
+.tabscon section {
+    height: 300px;
+    display: none;
+}
+ 
+.tabscon .conactive {
+    display: block;
+}
+ 
+.tabscon section input {
+    box-sizing: border-box;
+    padding: 10px;
+    width: 860px;
+    height: 300px;
+    border: 2px solid skyblue;
+    outline-color: skyblue;
+}
