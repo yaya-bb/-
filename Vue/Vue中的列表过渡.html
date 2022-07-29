@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue中的列表过渡</title>
+</head>
+<style>
+    .v-enter,
+    .v-leave-to{
+        opacity: 0;
+    }
+    .v-enter-active,
+    .v-leave-active{
+        transition: opacity 1s;
+    }
+</style>
+<body>
+    <div id="root">
+        <transition-group>
+            <div v-for="item in list" :key="item.id">
+                {{item.name}}
+            </div>
+        </transition-group>
+        <button @click="handleClick">Add</button>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<!-- Velocity.js  -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
+<script>
+    var count = 0;
+    var vm = new Vue({
+        el: '#root',
+        data:{
+            list:[]
+        },
+        methods:{
+            handleClick:function(){
+                this.list.push({
+                    id:count++,
+                    name: 'count'
+            })
+        }
+    }
+      
+});
+</script>
+</html>
