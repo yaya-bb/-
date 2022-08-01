@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue中的动画封装</title>
+</head>
+<body>
+    <div id="root">
+        <fade :show = "show">
+            <div>Hello world</div>
+        </fade>
+        <button @click = "handleClick">切换</button>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<!-- Velocity.js  -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script> -->
+<script>
+        Vue.component('fade',{
+        props:['show'],
+        template: `<transition @before-enter="handleBeforeEnter"
+                                @enter="handleEnter">
+                                <slot v-if="show"></slot>
+                    </transition>`,
+        methods:{
+            handleBeforeEnter:function(el){
+                el.style.color ="#ccc";
+            },
+            handleEnter:function(el,done){
+                setTimeout(() => {
+                    el.style.color ="black";
+                    done()
+                },2000)
+            }
+        }
+    })
+    var vm = new Vue({
+        el: '#root',
+        data: {
+            show:true,
+        },
+        methods: {
+            handleClick: function() {
+            this.show = !this.show;
+        }
+    }
+    });
+</script>
+</html>
