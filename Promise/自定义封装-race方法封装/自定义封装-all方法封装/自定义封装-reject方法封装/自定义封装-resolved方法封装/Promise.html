@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>自定义封装-race方法封装</title>
+  <script src="./Promise.js"></script>
+</head>
+<body>
+  <script>
+    const p = Promise.reject('Yep');
+    const p2 = Promise.resolve('Oh Yeah');
+    //调用all方法,只要有一个失败，则返回的就是失败的对象
+    let result = Promise.race([p, p2]);
+    console.log(result);
+  </script>
+</body>
+</html>

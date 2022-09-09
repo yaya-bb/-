@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>自定义封装-reject方法封装</title>
+  <script src="./Promise.js"></script>
+</head>
+<body>
+  <script>
+    const p = Promise.reject('error');
+    const p2 = Promise.reject(new Promise((resolve, reject) => {
+      reject('fail');
+    }));
+    // const p3 = Promise.resolve(Promise.resolve('Oh Yeah'));
+    console.log(p2);
+  </script>
+</body>
+</html>

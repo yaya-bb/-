@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>自定义封装-then指定的回调函数[异步执行]</title>
+  <script src="./Promise.js"></script>
+</head>
+<body>
+  <script>
+    let p1 = new Promise((resolve, reject) => {
+      resolve('ok');
+      console.log(111);
+    });
+    p1.then(value => {
+      console.log(222);//以不执行，等所有同步代码实现完后才执行
+    })
+    console.log(333);//由于then异步执行，所以结果为132
+  </script>
+</body>
+</html>
