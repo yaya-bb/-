@@ -7,7 +7,7 @@ function throttle(callback, wait) {
   return function (e) {
     // 获取当前的时间戳
     let now = Date.now();
-    // 判断
+    // 判断时间间隔是否满足设定的时间间隔
     if (now - start >= wait) {
       // 若满足条件则执行回调
       // this指向事件源，事件对象
