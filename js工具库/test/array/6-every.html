@@ -12,15 +12,15 @@
     const arr = [1, 2, 3, 4, 5, 101];
     // 用一个变量用于接收
     // every
-    const result = arr.every( item => {
-      return item >= 1;
-    });
-    console.log(result);
-    // every函数封装
-    // const result = every(arr, (item, index) => {
-    //   return item >= 0;
+    // const result = arr.every( item => {
+    //   return item >= 1;
     // });
     // console.log(result);
+    // every函数封装
+    const result = every(arr, (item, index) => {
+      return item >= 0;
+    });
+    console.log(result);
   </script>
 </body>
 </html>
