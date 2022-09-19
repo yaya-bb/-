@@ -16,3 +16,6 @@ function pull(arr, ...args) {
   // 返回
   return result;
 }
+function pullAll(arr, values) {
+  return pull(arr, ...values);
+}
