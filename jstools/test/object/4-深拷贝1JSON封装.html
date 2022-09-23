@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>深拷贝-JSON封装</title>
+  <script src="../../src/object/deepClone1.js"></script>
+</head>
+<body>
+  <script>
+    // JSON不能克隆方法
+    // 不能进行循环引用
+    const obj = {
+      a: 1,
+      b: ['e', 'f', 'g'],
+      c: {h: 20}
+    };
+    // 深拷贝
+    const result = deepClone1(obj);
+    console.log(obj);
+    console.log(result);
+  </script>
+</body>
+</html>

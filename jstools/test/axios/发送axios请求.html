@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>发送AJAX请求</title>
+</head>
+<body>
+  <script>
+    //AJAX的方法有get,post,pull,delete
+    // 方式一：函数
+    axios({
+      // 请求的类型
+      method: 'POST',
+      // 请求的url
+      url: 'http://127.0.0.1',
+      // url参数
+      params: {
+        a: 100,
+        b: 200
+      },
+      // 请求体
+      data: {
+        c: 300
+      }
+    }).then(response => {
+      console.log(response);
+    });
+    // 方式二：调用对象方法
+    axios.get('http://127.0.0.1', {
+      params: {
+        a: 100,
+        b: 200
+      },
+    }).then(response => {
+      console.log(response);
+    })
+  </script>
+</body>
+</html>
