@@ -11,23 +11,31 @@
   <script>
     //AJAX的方法有get,post,pull,delete
     // 方式一：函数
-    axios({
-      // 请求的类型
-      method: 'POST',
-      // 请求的url
-      url: 'https://api.apiopen.top/getJoke',
-      // url参数
+    // axios({
+    //   // 请求的类型
+    //   method: 'POST',
+    //   // 请求的url
+    //   url: 'https://api.apiopen.top/getJoke',
+    //   // url参数
+    //   params: {
+    //     a: 100,
+    //     b: 200
+    //   },
+    //   // 请求体
+    //   data: {
+    //     c: 300
+    //   }
+    // }).then(response => {
+    //   console.log(response);
+    // });
+    axios.get('https://api.apiopen.top/getJoke', {
       params: {
         a: 100,
         b: 200
       },
-      // 请求体
-      data: {
-        c: 300
-      }
     }).then(response => {
       console.log(response);
-    });
+    })
   </script>
 </body>
 </html>

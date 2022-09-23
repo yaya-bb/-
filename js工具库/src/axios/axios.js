@@ -48,3 +48,18 @@ function axios({method, url, params, data}){
 
   });
 }
+axios.get = function(url, options) {
+  // 发送ajax请求 GET
+  let config = Object.assign(options,{method: 'GET', url: url});
+  return axios(config);
+}
+axios.post = function(url, options) {
+  // 发送ajax请求 GET
+  let config = Object.assign(options,{method: 'POST', url: url});
+  return axios(config);
+}
+axios.put = function(url, options) {
+  // 发送ajax请求PUT
+  let config = Object.assign(options,{method:'PUT', url: url});
+  return axios(config);
+}
