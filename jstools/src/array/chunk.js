@@ -1,4 +1,4 @@
-function chunk(arr, size) {
+export function chunk(arr, size) {
   // 声明两个变量
   let result = [];
   let tmp = [];

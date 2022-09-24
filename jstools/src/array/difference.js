@@ -1,4 +1,4 @@
-function difference(arr1, arr2=[]) {
+export function difference(arr1, arr2=[]) {
   if (arr1.length === 0) {
     return [];
   }

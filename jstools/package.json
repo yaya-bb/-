@@ -1,8 +1,8 @@
 {
-  "name": "jstools",
+  "name": "yayabb-jstools",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/jstools.js",
   "directories": {
     "test": "test"
   },
@@ -10,7 +10,11 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:watch": "webpack --watch"
   },
-  "keywords": [],
+  "keywords": [
+    "array",
+    "object",
+    "function"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {

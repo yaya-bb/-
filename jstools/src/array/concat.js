@@ -1,4 +1,4 @@
-function concat(arr, ...args) {
+export function concat(arr, ...args) {
   // 声明一个空数组
   const result = [...arr];
   // 遍历数组
