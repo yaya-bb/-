@@ -10,7 +10,46 @@ let e: boolean | string;
 e = true;
 e = "hi";
 // any：表示的是任意类型，一个变量设置类型为any后相当于对该变量关闭了TS的类型检测
+// 使用TS时，不建议使用any类型
 let f: any;
 f = 'hello';
 f = 123;
 f = [123,1];
+// 声明变量如果不指定类型，则TS解析器会自动判断变量的类型为any（隐式的any）
+let g;
+g = true;
+g = 123;
+g = 'HaHaHa';
+// unknown 表示未知类型的值
+let h: unknown;
+h = true;
+h = "Hi";
+
+let s: string;
+// d的类型是any，它可以赋值给任意变量
+//  s = f;
+
+// unknown 是加上时一个类型安全的any
+// unknown 类型的变量，不能直接赋值给其他变量
+// 先进行类型检查
+if (typeof h === 'string') {
+  s = h;
+}
+// 类型断言(告诉解析器变量的实际类型h为string类型)
+/*
+* 语法：
+*   变量 as 类型
+*   <类型> 变量
+*/
+s = h as string;
+s = <string>e;
+
+// void 用来表示空： 以函数为例，就表示没有返回值的函数
+// void == undefined || null
+function fn(): void{
+
+}
+// never 表示永远不会返回结果
+function fn2(): never{
+  throw new Error('报错了！');
+}
