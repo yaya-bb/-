@@ -25,6 +25,16 @@
     // outFile将代码合并为一个文件
     // 设置outFile后，所有的全局作用域中的代码会合并到同一个文件中
     // 使用outFile，module则需要设置为amd或system
-    "outFile": "./dist/app.js"
+    "outFile": "./dist/app.js",
+    // 是否对js文件进行编译，默认为false
+    "allowJs": true,
+    // 是否检查js代码是否符合语法规范，默认为false
+    "checkJs": true,
+    // 是否移除注释，默认为false
+    "removeComments": true,
+    // 不生成编译后的文件
+    // "noEmit": true,
+    // 当有错误的时候不生成编译后的文件
+    "noEmitOnError": true
   }
 }
