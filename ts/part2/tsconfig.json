@@ -35,6 +35,17 @@
     // 不生成编译后的文件
     // "noEmit": true,
     // 当有错误的时候不生成编译后的文件
-    "noEmitOnError": true
+    "noEmitOnError": true,
+    // 所有严格检查的总开关
+    "strict": true,
+    // 在js中加"use strict"则开启严格模式
+    // 用来设置编译后的文件是否使用严格模式，默认为false
+    "alwaysStrict": true,
+    // 不允许隐式的any类型
+    "noImplicitAny": true,
+    // 不允许不明确类型的this
+    "noImplicitThis": true,
+    // 严格的检查空值
+    "strictNullChecks": true
   }
 }
