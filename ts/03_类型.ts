@@ -53,3 +53,67 @@ function fn(): void{
 function fn2(): never{
   throw new Error('报错了！');
 }
+// object表示一个js对象
+let a: object;
+a = {};
+a = function() {
+
+};
+// 建议使用如下形式
+// {}用来指定对象中可以包括哪些属性
+// 语法： {属性名: 属性值，属性名： 属性值}
+// 在属性名后面加一个?则代表该属性可选
+// [propName: string]表示任意字符串的属性名
+// [propName: string]: any表示任意类型的属性
+// let r: {name: string, [propName: string]: any}
+let k: {name: string, age?: number};
+k = {name: '孙悟空'};
+
+/*
+* 设置函数结构的类型声明
+*   语法: (形参: 类型, 形参: 类型...) => 返回值
+*/
+let u: (a:number, b:number) => number;
+u = function (n1, n2) {
+  return n1 + n2;
+}
+
+// string[] / Array<string>表示字符串数组
+// number[] / Array<number>表示数值数组
+/*
+*  数组的类型声明
+*  语法：
+*    类型[]
+*    Array<类型>
+*/
+let j: number[];
+let q: Array<string>;
+
+/*
+*  元组，元组就是固定长度的数组--tuple
+*/
+let l: [string, number];
+l = ["hi", 111];
+
+/*
+* enum 枚举
+*/
+enum Gender{
+  Male = 1,
+  Female = 0
+}
+let i: {name: string, gender: Gender};
+i = {
+  name: "孙悟空",
+  gender: Gender.Male
+}
+console.log(i.gender === Gender.Male);
+
+// &表示同时满足
+let n: {name: string} & {age: number};
+n = {name: "猪八戒", age: 30};
+
+// 类型的别名
+type myType = 1 | 2 | 3 | 4 | 5;
+let p: myType;
+
