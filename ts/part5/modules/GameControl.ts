@@ -31,7 +31,6 @@ class GameControl {
   keydownHandler(event:KeyboardEvent) {
     // 按键值
     console.log(event.key);
-    console.log(this.food.X);
     // 修改direction属性
     // 需要检查event.key的值是否合法（用户是否按了正确的按键）
     this.direction = event.key;
@@ -58,13 +57,30 @@ class GameControl {
         X += 10;
         break;
     }
+    this.checkEat(X, Y);
     // 修改蛇的X和Y值
-    this.snake.X = X;
-    this.snake.Y = Y;
-
+    try {
+      this.snake.X = X;
+      this.snake.Y = Y;
+    } catch (e) {
+      // 进入到catch，说明出现了异常，弹出一个提示信息
+      alert("Game Over!");
+      this.isLive = false;
+    }
     // 开启一个定时调用
     // 当isLive为true时才开启定时器
     this.isLive && setTimeout(this.run.bind(this), 300 - (this.scorePanel.level)*30);
+  }
+  // 检查蛇是否吃到食物
+  checkEat(X: number, Y: number) {
+    if(X === this.food.X && Y === this.food.Y) {
+      // 食物被吃到后需将位置进行重置
+      this.food.change();
+      // 分数增加
+      this.scorePanel.addScore();
+      // 蛇要增加一节
+      this.snake.addBody();
+    }
   }
 }
 
