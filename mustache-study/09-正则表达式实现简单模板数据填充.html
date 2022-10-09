@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var templateStr = '<h1>我{{thing}}是{{mood}}的</h1>';
+    let data = {
+      thing: "心情",
+      mood: "happy"
+    };
+    // 写一个函数识别{{}},机理是replace方法-可以进行捕获功能:捕获里面的文字(\w+)
+    // 单纯的replace只能替换第一个
+    // 如果需要把所有的进行替换，则需要使用正则/g/:全局寻找 w字母
+    // 函数中的参数：第一个为匹配的部分；第二个捕获的内容,一般为$1表示第一个捕获到的元素；第三个为为匹配的东西的位置，第四个为原串
+    // console.log(templateStr.replace(/\{\{(\w+)\}\}/g, function(findStr, $1) {
+    //   // $1为变量，所以不能使用data.$1
+    //   return data[$1];
+    // }));
+    // 封装成函数
+    function render(templateStr, data) {
+      return templateStr.replace(/\{\{(\w+)\}\}/g, function (findStr, $1) {
+        return data[$1];
+      });
+    }
+    var result = render(templateStr, data);
+    console.log(result);
+  </script>
+</body>
+</html>
