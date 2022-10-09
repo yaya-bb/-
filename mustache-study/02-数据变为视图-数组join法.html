@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 数组校验法本质是字符串的方法 -->
+  <ul id="list"></ul>
+  <script>
+    let arr = [
+      { "name": "小明", "age": 12}
+    ];
+    let list = document.getElementById("list");
+    // 以字符串的视角去添加html，可以换行较优雅
+    // 遍历arr数组，每遍历一项，就以字符串的视角将HTML字符串添加到list中
+    for(let i = 0; i<arr.length; i++) {
+      list.innerHTML += [
+    '<li>',
+    '  <div class="hd">'+ arr[i].name +'的信息</div>',
+    '  <div class="bd">',
+    '    <p>姓名：' + arr[i].name + '</p>',
+    '    <p>年龄：' + arr[i].age + '</p>',
+    '  </div>',
+    '</li>'
+    ].join('');
+    };
+  </script>
+</body>
+</html>
