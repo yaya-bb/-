@@ -7,23 +7,26 @@
   <title>Document</title>
 </head>
 <body>
+  <!-- 不是text/javascript就不会被当作javascript被执行 -->
+  <!-- 存储模板字符串 -->
+  <script type="text/template" id="mytemplate">
+    <ul>
+      {{#arr}}
+        <li>
+          <div class="hd">{{name}}的基本信息</div>
+          <div class="bd">
+            <p>姓名:{{name}}</p>
+            <p>年龄:{{age}}</p>
+          </div>
+        </li>
+      {{/arr}}
+    </ul>
+  </script>
   <script src="jslib/mustache.js"></script>
   <div id="container"></div>
   <script>
     // 模板字符串
-    var templateStr = `
-      <ul>
-        {{#arr}}
-          <li>
-            <div class="hd">{{name}}的基本信息</div>
-            <div class="bd">
-              <p>姓名:{{name}}</p>
-              <p>年龄:{{age}}</p>
-            </div>
-          </li>
-        {{/arr}}
-      </ul>
-    `;
+    var templateStr = document.getElementById("mytemplate").innerHTML;
     let data = {
       arr: [
       { "name": "小明", "age": 12},
