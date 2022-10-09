@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script src="jslib/mustache.js"></script>
+  <div id="container"></div>
+  <script>
+    // 模板字符串，循环数据项{{.}}
+    // {{}}中间不能写表达式
+    var templateStr = `
+      {{#m}}
+        <h1>你好</h1>
+      {{/m}}
+    `;
+    let data = {
+      m: true 
+    };
+    // 模板字符串，数据
+    let domStr = mustache.render(templateStr, data);
+    let container = document.getElementById("container");
+    container.innerHTML = domStr;
+  </script>
+</body>
+</html>
