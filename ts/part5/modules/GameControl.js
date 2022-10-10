@@ -12,7 +12,7 @@ class GameControl {
         this.isLive = true;
         this.snake = new Snake();
         this.food = new Food();
-        this.scorePanel = new ScorePanel();
+        this.scorePanel = new ScorePanel(10, 2);
         this.init();
     }
     // 游戏初始化方法，调用后游戏即开始
@@ -26,7 +26,7 @@ class GameControl {
     // 创建一个键盘按下的响应函数
     keydownHandler(event) {
         // 按键值
-        console.log(event.key);
+        // console.log(event.key);
         // 修改direction属性
         // 需要检查event.key的值是否合法（用户是否按了正确的按键）
         this.direction = event.key;
@@ -61,7 +61,7 @@ class GameControl {
         }
         catch (e) {
             // 进入到catch，说明出现了异常，弹出一个提示信息
-            alert("Game Over!");
+            alert(e.message);
             this.isLive = false;
         }
         // 开启一个定时调用
