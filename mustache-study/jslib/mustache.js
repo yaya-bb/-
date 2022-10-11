@@ -244,10 +244,12 @@ function parseTemplate (template, tags) {
 
   if (openSection)
     throw new Error('Unclosed section "' + openSection[1] + '" at ' + scanner.pos);
-
-  return nestTokens(squashTokens(tokens));
+  // tokens
+  var tokens = nestTokens(squashTokens(tokens));
+  console.log(tokens);
+  return tokens;
 }
-
+ 
 /**
  * Combines the values of consecutive text tokens in the given `tokens` array
  * to a single token.

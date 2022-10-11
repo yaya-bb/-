@@ -8,5 +8,23 @@
 </head>
 <body>
   <script src="jslib/mustache.js"></script>
+  <script>
+    var templateStr = `
+      <ul>
+        {{#arr}}
+          <li>
+            {{name}}的爱好是:
+              <ol>
+                {{#hobbies}}
+                  <li>{{.}}</li>
+                {{/hobbies}}
+              </ol>
+          </li>
+        {{/arr}}
+      </ul>
+    `;
+    // 数字表示从哪里开始到哪里结束（没有太大作用
+    mustache.render(templateStr, {});
+  </script>
 </body>
 </html>
