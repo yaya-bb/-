@@ -12,7 +12,20 @@
   <script src="/xuni/bundle.js"></script>
   <script>
     // 模板字符串
-    var templateStr = '我买了一个{{thing}}';
+    var templateStr = `
+      <ul>
+        {{#arr}}
+          <li>
+            {{name}}的爱好是:
+              <ol>
+                {{#hobbies}}
+                  <li>{{.}}</li>
+                {{/hobbies}}
+              </ol>
+          </li>
+        {{/arr}}
+      </ul>
+    `;
     // 数据
     var data = {};
     // 全局变量,调用render
