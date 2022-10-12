@@ -1,4 +1,5 @@
 import Scanner from './Scanner.js';
+import nestTokens from './nestTokens.js';
 // 向外默认暴露这个函数
 // 将模板字符串变为tokens数组
 export default function parseTemplateToTokens(templateStr) {
@@ -31,5 +32,6 @@ export default function parseTemplateToTokens(templateStr) {
     }
     scanner.scan('}}');
   }
-  return tokens;
+  // 返回折叠的tokens
+  return nestTokens(tokens);
 }
