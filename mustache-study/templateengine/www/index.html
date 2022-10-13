@@ -12,22 +12,35 @@
   <script src="/xuni/bundle.js"></script>
   <script>
     // 模板字符串
-    var templateStr = `
-      <ul>
-        {{#arr}}
-          <li>
-            {{name}}的爱好是:
-              <ol>
-                {{#hobbies}}
-                  <li>{{.}}</li>
-                {{/hobbies}}
-              </ol>
-          </li>
-        {{/arr}}
-      </ul>
-    `;
+    // var templateStr = `
+    //   <ul>
+    //     {{#arr}}
+    //       <li>
+    //         {{name}}的爱好是:
+    //           <ol>
+    //             {{#hobbies}}
+    //               <li>{{.}}</li>
+    //             {{/hobbies}}
+    //           </ol>
+    //       </li>
+    //     {{/arr}}
+    //   </ul>
+    // `;
+    let templateStr = "我爱{{name}},因为{{a.b.c}}"
     // 数据
-    var data = {};
+    let data = {
+      name: '水果',
+      a: {
+        b: {
+          c: '好吃'
+        }
+      }
+    };
+    // var data = {
+    //   arr: [
+    //     {"name": "小明", "hobbies": ["游泳", "长跑"]},
+    //   ] 
+    // };
     // 全局变量,调用render
     templateEngine.render(templateStr, data);
   </script>

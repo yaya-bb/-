@@ -27,7 +27,7 @@ export default function parseTemplateToTokens(templateStr) {
       }else if(words[0] == "/") {
         tokens.push(['/', words.substring(1)]);
       } else {
-        tokens.push(['text', words]);
+        tokens.push(['name', words]);
       }
     }
     scanner.scan('}}');

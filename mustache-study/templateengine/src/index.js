@@ -1,5 +1,6 @@
 // 调包
 import parseTemplateToTokens from './parseTemplateToTokens.js'; 
+import renderTemplate from './renderTemplate.js';
 // 全局提供templateEngine对象
 window.templateEngine = {
   // // 渲染方法
@@ -21,6 +22,7 @@ window.templateEngine = {
   render(templateStr, data) {
     // 调用parseTemplateToTokens函数，让模版字符串能够变为tokens数组
     var tokens = parseTemplateToTokens(templateStr);
-    console.log(tokens);
+    // 调用renderTemplate函数，让tokens数组变为dom字符串
+    var domStr = renderTemplate(tokens, data);
   }
 }
