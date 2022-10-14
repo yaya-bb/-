@@ -11,8 +11,8 @@
 那么lookup(dataObj, 'a.b.c)结果就是100
 */
 export default function lookup(dataObj, keyName) {
-  // 看看keyName中有没有点符号
-  if(keyName.indexOf('.') != -1) {
+  // 看看keyName中有没有点符号，但不能是.本身，{{.}}单纯.也用于解析数据
+  if(keyName.indexOf('.') != -1 && keyName != '.') {
     // 如果有点符号，那么拆开
     let keys = keyName.split('.');
     // 设置一个临时变量，这个临时变量用于周转，一层一层找下去

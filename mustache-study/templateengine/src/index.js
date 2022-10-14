@@ -20,9 +20,10 @@ window.templateEngine = {
   //     scanner.scan('}}');
   //   }
   render(templateStr, data) {
-    // 调用parseTemplateToTokens函数，让模版字符串能够变为tokens数组
+    // 1.把模版字符串变成tokens，调用parseTemplateToTokens函数，让模版字符串能够变为tokens数组
     var tokens = parseTemplateToTokens(templateStr);
-    // 调用renderTemplate函数，让tokens数组变为dom字符串
+    // 2.把tokens变为dom，调用renderTemplate函数，让tokens数组变为dom字符串
     var domStr = renderTemplate(tokens, data);
+    return domStr;
   }
 }
