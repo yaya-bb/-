@@ -35,7 +35,6 @@ export default function parseTemplateToTokens(templateStr) {
           
       }
     }
-    // 存起来
     tokens.push(['text', _words]);
     // 过双大括号
     scanner.scan('{{');
