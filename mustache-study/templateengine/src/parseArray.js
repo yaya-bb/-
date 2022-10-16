@@ -26,6 +26,7 @@ export default function parseArray(token, data) {
   // 它是遍历数据，而不是遍历tokens，数组中的数据有几条，就要遍历几条
   for (let i = 0; i < v.length; i++) {
     // 拼接返回，递归调用
+    // 递归调用renderTemplate
     resultStr += renderTemplate(token[2], {
       // 现在这个数据小对象，是v[i]的展开，就是v[i]本身
       ...v[i],
@@ -35,6 +36,5 @@ export default function parseArray(token, data) {
   }
   // 返回的结果会加到最后结果字符串中，由于最终测试的地方是数组
   // 因此思路要局限在数组的解析上
-  // 递归调用renderTemplate
   return resultStr;
 }
