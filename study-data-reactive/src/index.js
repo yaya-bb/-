@@ -1,42 +1,37 @@
-var obj = {};
-
-function defineReactive (data, key, val) {
-  // val的值相当于get和set这两个函数闭包中的环境
-  // 闭包是一定要有内外两层函数嵌套，get、set是内层，defineReactive是外层
-  // get访问这个参数,set把newValue设置为这个参数
-  // 可以使用Object.defineProperty去定义一些隐藏的属性
-  
-  Object.defineProperty(data, key, {
-    // 可枚举
-    enumerable: true,
-    // 可以被配置，比如可以被delete
-    configurable: true,
-    // value: 2,
-    // // 是否可写
-    // writable: true
-    // get和value不能同时使用
-    // getter/setter 需要变量周转才能工作
-    // 临时变量不是特别美观，可以封装到一个函数中，利用函数的闭包特性
-    // 闭包就是函数外部的作用域
-    // getter 对变量的得值
-    get() {
-      console.log('访问');
-      return val;
-    },
-    // setter对变量的赋值
-    set(newValue) {
-      // 负责劫持
-      console.log('修改');
-      if(val == newValue) {
-        return;
-      }
-      val = newValue;
+import defineReactive from "./defineReactive";
+import Observer from "./Observer";
+var obj = {
+  a: {
+    m: {
+      n: 5
     }
-  });
+  }
+};
+
+// 创建observe函数，注意函数的名字没有r
+// 这个函数只为对象服务
+function observe(value) {
+  // 如果value不是对象，什么都不做
+  if(typeof value != 'object')
+    return;
+  // 定义ob
+  let ob;
+  // __ob__存储Observer实例，且不希望它与常见名字重名
+  // 第一步是调observe(obj)来触发全部东西
+  // 第二步是看obj身上有没有__ob__
+  // 如果没有就会new Observer()
+    /*
+      将产生的实例，添加到__ob__上
+    */
+  // 遍历下一层属性，逐个defineReactive
+    /*
+      当设置某个属性值的时候，会触发set，里面有newValue，
+      这个newValue也得被observe()一下
+    */
+  if(typeof value.__ob__ !== 'undefined') {
+    ob = value.__ob__;
+  } else {
+    ob = new Observer(value);
+  }
+  return ob;
 }
-defineReactive(obj, 'a', 10)
-console.log(obj);
-console.log(obj.a);
-obj.a = 8;
-obj.a++;
-console.log(obj.a);
