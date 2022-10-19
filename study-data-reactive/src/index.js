@@ -1,37 +1,26 @@
-import defineReactive from "./defineReactive";
-import Observer from "./Observer";
+import observe from "./observe";
 var obj = {
   a: {
     m: {
       n: 5
+    }
+  },
+  b: 10,
+  c: {
+    d: {
+      e: {
+        f: 222
+      }
     }
   }
 };
 
 // 创建observe函数，注意函数的名字没有r
 // 这个函数只为对象服务
-function observe(value) {
-  // 如果value不是对象，什么都不做
-  if(typeof value != 'object')
-    return;
-  // 定义ob
-  let ob;
-  // __ob__存储Observer实例，且不希望它与常见名字重名
-  // 第一步是调observe(obj)来触发全部东西
-  // 第二步是看obj身上有没有__ob__
-  // 如果没有就会new Observer()
-    /*
-      将产生的实例，添加到__ob__上
-    */
-  // 遍历下一层属性，逐个defineReactive
-    /*
-      当设置某个属性值的时候，会触发set，里面有newValue，
-      这个newValue也得被observe()一下
-    */
-  if(typeof value.__ob__ !== 'undefined') {
-    ob = value.__ob__;
-  } else {
-    ob = new Observer(value);
-  }
-  return ob;
-}
+/*
+* 这个函数是侦听数据变化的入口文件，通过调用该函数一方面触发了其侦听对象数据变化的能力；
+* 另一方面定义了何时递归到最内层的终止条件
+*/
+observe(obj);
+obj.a.m = 10;
+observe(obj.c.d.e.f);
