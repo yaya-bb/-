@@ -1,4 +1,6 @@
 import observe from "./observe";
+// 给对象obj的属性key定义监听
+// obj: 传入的数据，key:监听的属性,value:闭包环境提供的周转变量
 export default function defineReactive (obj, key, val) {
   // val的值相当于get和set这两个函数闭包中的环境
   // 闭包是一定要有内外两层函数嵌套，get、set是内层，defineReactive是外层

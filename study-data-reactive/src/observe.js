@@ -1,4 +1,8 @@
 import Observer from "./Observer.js";
+/*
+* 监听value尝试创建Observer实例，如果value已经是响应式数据，就不需要再创建Observer实例，
+* 直接返回已经创建的Observer实例即可，避免重复侦测value变化的问题
+*/
 export default function observe(value) {
   // 如果value不是对象，什么都不做(表示该递归到的是基本类型，其变化可被侦听的)
   if(typeof value != 'object')

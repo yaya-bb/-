@@ -9,7 +9,12 @@ export default class Observer {
   // 类需要思考如何被实例化
   constructor(value) {
     // 添加__ob__属性，实际上是不可枚举属性
+    /*
+    * __ob__的作用可以用来标记当前value是否已经被Observer转换为响应式数据了；
+    * 而且可以通过__ob__来访问Observer的实例
+    */
     // 给实例this，一定要注意，构造函数中的this不是表示类本身，而是表示实例)，给实例添加了__ob__属性，值是这次new的实例
+    // 定义一个对象属性
     def(value, '__ob__', this, false);
     console.log('构造器', value);
     // 检查是数组还是对象
@@ -24,6 +29,7 @@ export default class Observer {
     }
   };
   // 遍历，遍历value里面的每一个key,让每一个key设置为defineReactive
+  // 对于对象上的属性进行遍历，将其变为响应式
   walk(value) {
     // defineReactive被Observer的walk方法调用
     for(let k in value) {
@@ -35,6 +41,9 @@ export default class Observer {
   // 数组的特殊遍历
   observeArray(arr) {
     for(let i = 0; i < arr.length; i++) {
+      /*
+      * Observer类会附加到每一个被侦测的object上，一旦被附加，Observer会将object所有属性转换为getter/setter的形式
+      */
       // 逐项进行observe
       observe(arr[i]);     
     }
