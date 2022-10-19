@@ -1,6 +1,7 @@
 import { def } from './utils.js'
 import defineReactive from './defineReactive.js';
 import { arrayMethods } from './array.js';
+import observe from './observe.js';
 // Observer 将一个正常的object转换为每个层级的属性都是响应式(可以被侦测的)的object
 // 大写开头表示一个类
 export default class Observer {
@@ -15,11 +16,13 @@ export default class Observer {
     if(Array.isArray(value)) {
       // 如果是数组，要强行将这个数组的原型指向arrayMethods
       Object.setPrototypeOf(value, arrayMethods);
+      // 让数组变得observe
+      this.observeArray(value);
     } else {
       // 将一个正常的object转换为每个层级的属性都是响应式(可以被侦测的)的object
       this.walk(value);
     }
-  }
+  };
   // 遍历，遍历value里面的每一个key,让每一个key设置为defineReactive
   walk(value) {
     // defineReactive被Observer的walk方法调用
@@ -27,6 +30,13 @@ export default class Observer {
       // 把value的k属性变成reactive
       // 通过这步操作，外层变成响应式
       defineReactive(value, k);
+    }
+  }
+  // 数组的特殊遍历
+  observeArray(arr) {
+    for(let i = 0; i < arr.length; i++) {
+      // 逐项进行observe
+      observe(arr[i]);     
     }
   }
 }
