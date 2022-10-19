@@ -5,7 +5,7 @@ export default function defineReactive (obj, key, val) {
   // get访问这个参数,set把newValue设置为这个参数
   // 可以使用Object.defineProperty去定义一些隐藏的属性
   // 如果有两个参数
-  console.log("defineReactive", key);
+  // console.log("defineReactive", key);
   if(arguments.length == 2) {
     val = obj[key];
   }

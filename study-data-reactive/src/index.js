@@ -12,7 +12,8 @@ var obj = {
         f: 222
       }
     }
-  }
+  },
+  g: [22,44]
 };
 
 // 创建observe函数，注意函数的名字没有r
@@ -22,5 +23,7 @@ var obj = {
 * 另一方面定义了何时递归到最内层的终止条件
 */
 observe(obj);
-obj.a.m = 10;
-observe(obj.c.d.e.f);
+// obj.a.m = 10;
+// observe(obj.c.d.e.f);
+obj.g.push(20);
+console.log(obj.g);

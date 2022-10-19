@@ -1,4 +1,4 @@
-import Observer from "./Observer";
+import Observer from "./Observer.js";
 export default function observe(value) {
   // 如果value不是对象，什么都不做(表示该递归到的是基本类型，其变化可被侦听的)
   if(typeof value != 'object')

@@ -1,5 +1,6 @@
 import { def } from './utils.js'
 import defineReactive from './defineReactive.js';
+import { arrayMethods } from './array.js';
 // Observer 将一个正常的object转换为每个层级的属性都是响应式(可以被侦测的)的object
 // 大写开头表示一个类
 export default class Observer {
@@ -10,8 +11,14 @@ export default class Observer {
     // 给实例this，一定要注意，构造函数中的this不是表示类本身，而是表示实例)，给实例添加了__ob__属性，值是这次new的实例
     def(value, '__ob__', this, false);
     console.log('构造器', value);
-    // 将一个正常的object转换为每个层级的属性都是响应式(可以被侦测的)的object
-    this.walk(value);
+    // 检查是数组还是对象
+    if(Array.isArray(value)) {
+      // 如果是数组，要强行将这个数组的原型指向arrayMethods
+      Object.setPrototypeOf(value, arrayMethods);
+    } else {
+      // 将一个正常的object转换为每个层级的属性都是响应式(可以被侦测的)的object
+      this.walk(value);
+    }
   }
   // 遍历，遍历value里面的每一个key,让每一个key设置为defineReactive
   walk(value) {
