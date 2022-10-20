@@ -60,6 +60,7 @@ methodsNeedChange.forEach(methodName => {
     }
 
     console.log('被修改啦');
+    ob.dep.notify();
     return result;
   }, false);
 });

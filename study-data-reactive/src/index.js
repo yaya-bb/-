@@ -25,5 +25,5 @@ var obj = {
 observe(obj);
 // obj.a.m = 10;
 // observe(obj.c.d.e.f);
-obj.g.push(20);
+obj.g.push(123);
 console.log(obj.g);
