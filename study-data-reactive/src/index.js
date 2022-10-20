@@ -1,4 +1,5 @@
 import observe from "./observe";
+import Watcher from "./Watcher";
 var obj = {
   a: {
     m: {
@@ -23,7 +24,9 @@ var obj = {
 * 另一方面定义了何时递归到最内层的终止条件
 */
 observe(obj);
-// obj.a.m = 10;
+new Watcher(obj, 'a.m.n', (val) => {
+  console.log('*****', val);
+});
 // observe(obj.c.d.e.f);
-obj.g.push(123);
-console.log(obj.g);
+obj.a.m.n = 99;
+console.log(obj);

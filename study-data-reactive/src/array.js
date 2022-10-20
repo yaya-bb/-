@@ -58,8 +58,9 @@ methodsNeedChange.forEach(methodName => {
     if(inserted) {
       ob.observeArray(inserted);
     }
-
     console.log('被修改啦');
+    // 发布订阅模式，通知dep
+    // 向依赖发送信息
     ob.dep.notify();
     return result;
   }, false);
