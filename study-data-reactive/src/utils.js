@@ -1,4 +1,4 @@
-// 遍历工具函数
+// 定义一个对象属性
 export const def = function (obj, key, value, enumerable) {
   Object.defineProperty(obj, key, {
     value,

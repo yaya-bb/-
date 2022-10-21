@@ -17,7 +17,7 @@ export default class Observer {
     // 添加__ob__属性，实际上是不可枚举属性
     /*
     * __ob__的作用可以用来标记当前value是否已经被Observer转换为响应式数据了；
-    * 而且可以通过__ob__来访问Observer的实例
+    * 而且可以通过value.__ob__来访问Observer的实例
     */
     // 给实例this，一定要注意，构造函数中的this不是表示类本身，而是表示实例)，给实例添加了__ob__属性，值是这次new的实例
     // 定义一个对象属性

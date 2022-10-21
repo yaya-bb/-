@@ -3,8 +3,9 @@ import Dep from "./Dep";
 // 对象是在getter中收集依赖，在setter中触发依赖
 // 数组是在getter中收集依赖，在拦截器中触发依赖
 
-// 给对象obj的属性key定义监听
+// 给对象obj定义一个响应式的属性
 // obj: 传入的数据，key:监听的属性,value:闭包环境提供的周转变量
+
 export default function defineReactive (obj, key, val) {
   // 每个数据都要维护一个属于自己的数组，用来存放依赖自己的watcher
   const dep = new Dep();
@@ -20,7 +21,7 @@ export default function defineReactive (obj, key, val) {
   // 子元素要进行observe,至此形成了递归。这个递归不是函数自己调用自己，而是多个函数，类循环调用
   let childOb = observe(val);
 
-  // 对data的key进行数据劫持
+  // 对obj的key进行属性拦截
   Object.defineProperty(obj, key, {
     // 可枚举
     enumerable: true,
@@ -58,6 +59,7 @@ export default function defineReactive (obj, key, val) {
       // 修改数据
       val = newValue;
       // 当设置了新值，这个新值也要被observe
+      // 新值如果是对象，仍然需要递归遍历处理
       childOb = observe(newValue);
       // 触发依赖
       // 发布订阅模式，通知dep
