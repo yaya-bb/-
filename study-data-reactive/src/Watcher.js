@@ -8,16 +8,24 @@ import Dep from "./Dep";
 * Dep使用发布订阅模式，当数据发生变化时，会循环依赖列表，把所有的Watcher都通知一遍
 * Watcher是一个中介的角色，数据发生变化时通知它，然后它再通知组件
 */
+/*
+*功能:
+   实例化Watch时，往dep中添加自己
+   当数据变化触发dep，dep通知所有对应的Watch实例更新视图
+*/
 let uid = 0;
+// Watcher是一个中介的角色，数据发生变化时通知它，然后它再通知其他地方
 export default class Watcher {
   constructor(target, expression, callback) {
-    // target 监听哪个对象，expression哪个对象怎样的表达式，callback回调
+    // target 监听哪个对象实例，expression哪个对象怎样的表达式【订阅的属性名】，callback数据变化后要执行的回调
     console.log("我是watcher类的构造器");
     this.id = uid++;
+    // 触发getter前，将当前订阅者实例村春给Dep类
     this.target = target;
-    // 把表达式按点来拆分
+    // 把表达式按点来拆分，执行this.getter()就可以读取data.a.b.c的内容
     this.getter = parsePath(expression);
     this.callback = callback;
+    // 记录属性更改之前的值，用于进行更新状态检测(导致属性的getter的触发)
     this.value = this.get();
   }
   update() {
@@ -32,6 +40,7 @@ export default class Watcher {
     try {
       value = this.getter(obj);
     } finally {
+      // 操作完毕后清除target，用于存储下一个Watch实例
       Dep.target = null;
     }
     return value;
@@ -44,6 +53,7 @@ export default class Watcher {
     if(value !== this.value || typeof value == 'object') {
       const oldValue = this.value;
       this.value = value;
+      // 调用Watcher实例的时候传递过来的回调函数，并且确定它的this指向this.target
       cb.call(this.target, value, oldValue);
     }
   }
