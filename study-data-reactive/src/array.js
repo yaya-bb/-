@@ -1,18 +1,23 @@
 import { def } from './utils.js';
+/* 正因为可以通过Array原型上的方法来改变数组的内容，所以像对象那种通过getter/setter的实现方式就行不通
+*  ES6之前没有提供可以拦截原型方法的能力，我们可以用自定义的方法去覆盖原生的原型方法
+*/
 // 得到Array的原型
 const arrayPrototype = Array.prototype;
+// 这七个方法定义在Array.prototype上，要保留方法的功能，同时增加数据劫持
 console.log(arrayPrototype);
-// 数组侦查面试回答：
-// 1.以arrayPrototype为原型(__proto__)创建一个arrayMethods对象，并将其暴露
+// 数组侦查面试回答：(思路)
+// 1.以arrayPrototype为原型(__proto__)创建一个arrayMethods对象，并将其暴露;
 // Object.create():创建一个新对象，使用现有的对象来提供新创建的对象的__proto__
 export const arrayMethods = Object.create(arrayPrototype);
 // 2.然后用ES6强制定义数组的原型指向arrayMethods：Object.setPrototypeOf(o, arrayMethods) / Object.create() / o.__proto = arrayMethods
 // 要被改写的7个数组方法
-// 只有调用数组7个方法的一个，才能执行这个值或者调用这个值
+// Vue通过改写数组的七个方法(可以改变数组自身内容的方法)来实现对数组的响应式处理
 /* Object.defineProperty不能直接监听数组内部的变化，那么数组内容变化应该怎么操作？
 *  Vue主要采用的是改装数组方法的方式(push,pop,shift,unshift,splice,sort,reverse),
 *  在保留其原有功能的前提下，将其添加的项变为响应式
 */
+// 3.这就相当于一个拦截器覆盖Array.prototype,每当使用Array原型上的方法操作数组时，其实执行的是拦截器中提供的方法。
 const methodsNeedChange = [
 //   // Vue底层改写这7个方法
   'push',
@@ -54,7 +59,7 @@ methodsNeedChange.forEach(methodName => {
         // splice格式是splice(下标, 数量, 插入的新项)
         inserted = args.slice(2);
     }
-    // 对于有插入项的, 让新项变为响应的
+    // 查看有没有新插入的项inserted，有的话就劫持
     if(inserted) {
       ob.observeArray(inserted);
     }
