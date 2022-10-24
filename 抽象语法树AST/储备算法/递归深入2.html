@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 转换数组的形式[1, 2, 3,[4, 5]]要变为
+    // {
+    //   children: [
+    //     {
+    //       value: 1
+    //     },
+    //     {
+    //       value: 2
+    //     },
+    //     {
+    //       value: 3
+    //     },
+    //     {
+    //       children: [
+    //         {
+    //           value: 4
+    //         },
+    //         {
+    //           value: 5
+    //         }
+    //       ]
+    //     }
+    //   ]
+    // }
+    let arr = [1, 2, 3, [4, 5]];
+    // 转换函数写法1:
+    // function convert(arr) {
+    //   // 准备一个结果数组
+    //   let result = [];
+    //   // 遍历传入的arr的每一项
+    //   for(let i = 0; i < arr.length; i++) {
+    //     // 如果遍历到的数字是number, 直接放进去
+    //     if(typeof arr[i] == 'number') {
+    //       result.push({
+    //         value: arr[i]
+    //       });
+    //     } else if(Array.isArray(arr[i])) {
+    //       // 如果遍历到的这项是数组，那么就递归
+    //       result.push({
+    //         children: convert(arr[i])
+    //       })
+    //     }
+    //   }
+    //   return result;
+    // }
+    // 转换函数写法2: 参数不是arr这个词语，而是item可能是数组，也可能是数字
+    // 写法1的递归次数要大大小于写法2；写法2中，遇见什么东西都要递归一下
+    function convert(item) {
+      if(typeof item == 'number') {
+        // 如果传进来的参数是数字
+        return {
+          value: item
+        };
+      } else if (Array.isArray(item)) {
+        // 如果传进来的参数是数组
+        return {
+          // 把数组映射出来，暗含了循环,每一项进行递归
+          children: item.map(_item => convert(_item))
+        }
+      }
+    }
+    let o = convert(arr);
+    console.log(o);
+  </script>
+</body>
+</html>
