@@ -1,10 +1,10 @@
 import parse from "./parse";
 // 模板字符串
 let templateStr = `
-  <div>
-    <h3></h3>
+  <div class="box">
+    <h3 class="title"></h3>
     <ul>
-      <li>A</li>
+      <li id="label">A</li>
       <li>B</li>
       <li>C</li>
     </ul>
