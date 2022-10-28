@@ -26,7 +26,7 @@ export default function parseAttrsString(attrsString) {
   // 下面的代码功能是，将["k=v","k=v"]变为[{name:k, value:v},{name:k, value:v}];
   // 映射-数组的长度不会变多也不会变少
   result = result.map(item => {
-    // 根据等号拆分和捕获
+    // 根据等号进行拆分和捕获
     const itemMatch = item.match(/^(.+)="(.+)"$/);
     return {
       name:itemMatch[1],
