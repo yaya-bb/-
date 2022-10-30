@@ -5,7 +5,7 @@ let templateStr = `
     <h3 class="title"></h3>
     <ul>
       <li id="label">A</li>
-      <li>B</li>
+      <li id="label1">B</li>
       <li>C</li>
     </ul>
   </div>
