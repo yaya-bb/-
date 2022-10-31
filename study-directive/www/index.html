@@ -7,7 +7,13 @@
   <title>Document</title>
 </head>
 <body>
-  <div id="app"></div>
+  <div id="app" v-if="a">
+    <h3>123</h3>
+    <input type="text" v-modal="a">
+    <ul>
+      <li>201</li>
+    </ul>
+  </div>
   <script src="/xuni/bundle.js"></script>
   <script>
     new Vue({
