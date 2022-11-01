@@ -1,3 +1,4 @@
+import Watcher from './Watcher'
 export default class Compile {
   constructor(el, vue) {
     // vue实例
@@ -10,6 +11,8 @@ export default class Compile {
       let $fragment = this.node2Fragment(this.$el);
       // 编译
       this.compile($fragment);
+      // 替换好的内容要上树
+      this.$el.appendChild($fragment);
     }
   }
     // createdocumentfragment()方法创建一虚拟的节点对象，节点对象包含所有属性和方法
@@ -32,15 +35,15 @@ export default class Compile {
     // 得到子元素
     let childNodes = el.childNodes;
     let self = this;
+    var reg = /\{\{(.*)\}\}/;
     childNodes.forEach(node => {
       let text = node.textContent;
       if(node.nodeType == 1) {
       // 元素节点
         self.compileElement(node);
-      } else if(node.nodeType == 3) {
-        // 文本节点
-        let text = node.textContent;
-        console.log(text);
+      } else if(node.nodeType == 3 && reg.test(text)) {
+        let name = text.match(reg)[1];
+        self.compileText(node, name);
       }
     })
   }
@@ -69,5 +72,25 @@ export default class Compile {
       }
     });
   }
-
+  compileText(node, name) {
+    console.log('a1a1', name);
+    console.log('bb', this.getVueVal(this.$vue, name));
+    node.textContent = this.getVueVal(this.$vue, name);
+    // 添加监听,收集依赖
+    new Watcher(this.$vue, name, value => {
+      // 监听新的变化
+      node.textContent = value;
+    });
+  }
+  // vue: 原型，exp是.语法
+  getVueVal(vue, exp) {
+    var val = vue;
+    exp = exp.split('.');
+    // 一层一层的存进去
+    exp.forEach(k => {
+      val = val[k];
+    });
+    console.log(val);
+    return val;
+  }
 }
