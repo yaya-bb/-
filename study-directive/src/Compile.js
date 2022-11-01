@@ -53,6 +53,7 @@ export default class Compile {
     // 得到身上的属性
     let nodeAttrs = node.attributes;
     // 类数组对象变为数组
+    let self = this;
     [].slice.call(nodeAttrs).forEach(attr => {
       // 这里就分析指令
       let attrName = attr.name;
@@ -65,7 +66,22 @@ export default class Compile {
         // 指令的触发
         if(dir == 'modal') {
           // 双向数据监听
-          console.log('发现', value);
+          // console.log('发现', value);
+          // 第一件事情: 添加Watcher
+          new Watcher(self.$vue, value, value => {
+            node.value = value;
+          });
+          // 得到值
+          let v = self.getVueVal(self.$vue, value);
+          // 显示值-双向绑定
+          node.value = v;
+          // 添加监听事件
+          node.addEventListener('input', e => {
+            let newVal = e.target.value;
+            // 将value设置为新值newVal
+            self.setVueVal(self.$vue, value, newVal);
+            v = newVal;
+          });
         } else if(dir == 'if') {
           console.log('if', value);
         }
@@ -89,6 +105,22 @@ export default class Compile {
     // 一层一层的存进去
     exp.forEach(k => {
       val = val[k];
+    });
+    console.log(val);
+    return val;
+  };
+  setVueVal(vue, exp, value) {
+    var val = vue;
+    exp = exp.split('.');
+    // 一层一层的存进去
+    // 因为设置和序号相关，所以需要添加index
+    exp.forEach((k, index) => {
+      // 需要判断最后是否不是最后一个
+      if(index < exp.length - 1) {
+        val = val[k];
+      } else {
+        val[k] = value;
+      }
     });
     console.log(val);
     return val;
