@@ -16,12 +16,18 @@
   </div>
   <script src="/xuni/bundle.js"></script>
   <script>
-    new Vue({
+    var vm = new Vue({
       el: '#app',
       data: {
         a: 10
+      },
+      watch: {
+        a() {
+          console.log('改变啦');
+        }
       }
     });
+    console.log(vm);
   </script>
 </body>
 </html>
