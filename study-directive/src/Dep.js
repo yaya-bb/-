@@ -9,6 +9,7 @@
 */
 let uid = 0;
 // 定义依赖关系，依赖收集的核心
+// 在数据发生改变时，将收集到watcher依赖全部更新
 export default class Dep {
   constructor() {
     console.log('我是Dep的构造器');
@@ -22,7 +23,7 @@ export default class Dep {
 
     this.subs.push(sub);
   }
-  // 添加依赖
+  // 调用Dep.target.addDep方法，添加依赖
   // 将dep实例添加到当前的订阅者中(这个过程中也会将当前的订阅者添加到dep的订阅者列表中)
   depend() {
     // target是一个全局静态属性，可以理解为当前的目标Watcher，也就是当前的订阅者
@@ -40,6 +41,7 @@ export default class Dep {
       this.addSub(Dep.target);
     }
   }
+  // 将subs数组中收集的watcher实例依次执行相关的update函数更新视图
   // 通知所有的订阅者进行更新
   notify() {
     console.log('Notify');

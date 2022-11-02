@@ -17,6 +17,7 @@ import Dep from "./Dep";
 export default function defineReactive (obj, key, val) {
   // 每个数据都要维护一个属于自己的数组，用来存放依赖自己的watcher
   // 创建信息中心
+  // 该对象用于收集该属性的相关依赖
   const dep = new Dep();
   // val的值相当于get和set这两个函数闭包中的环境
   // 闭包是一定要有内外两层函数嵌套，get、set是内层，defineReactive是外层
@@ -27,6 +28,7 @@ export default function defineReactive (obj, key, val) {
   if(arguments.length == 2) {
     val = obj[key];
   }
+  // 如果val也是对象，则也会递归遍历val的属性，将其设置为响应式对象。
   // 子元素要进行observe,至此形成了递归。这个递归不是函数自己调用自己，而是多个函数，类循环调用
   let childOb = observe(val);
 
@@ -45,10 +47,16 @@ export default function defineReactive (obj, key, val) {
     // 闭包就是函数外部的作用域
     // getter 获取数据
     get() {
+      // 当get触发时，我们可以让dep去收集watcher，获取obj上的属性对应的值并赋值给value
       console.log('访问'+ key + '属性');
       // 如果现在处于依赖收集阶段
       // *数据变化时，通知添加订阅者
+      // 【Dep.target：将target放到Dep的原型上】
       if(Dep.target) {
+        /* 如果存在值，就可以收集相关watcher，然后去判断childOb是否存在，如果存在我们还需要建立childOb上的dep
+           与当前触发get的watcher的联系：Object.defineProperty无法响应到数组length属性的变化及数组原型方法改
+           变数组的几个方法，因此响应这些变化将childOb.dep也收集一下Watcher实例的依赖，方便后续的更新操作
+        */
         dep.depend();
         // 判断有没有子元素
         if(childOb) {
@@ -60,14 +68,17 @@ export default function defineReactive (obj, key, val) {
     },
     // setter对变量的赋值
     set(newValue) {
+      // 当set触发时，我们可以调用dep的notify方法，更新视图
       // 负责劫持
       console.log('修改' + key + '属性', newValue);
       // 如果传入的值相等就不用修改
       if(val == newValue) {
         return;
       }
-      // 修改数据
+      // 如果不一样，则将新值赋值给val，修改数据
       val = newValue;
+      // 防止新的val是对象的情况
+      // 故当val为对象时这里的childOb为val对象上的Observer实例，当val为基本类型时，则childOb为undefined
       // 当设置了新值，这个新值也要被observe
       // 新值如果是对象，仍然需要递归遍历处理
       childOb = observe(newValue);
