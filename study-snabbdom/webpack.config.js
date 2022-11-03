@@ -7,8 +7,6 @@ module.exports = {
   // 打包到神门文件
   output: {
     filename: 'bundle.js',
-    // 虚拟打包的路径，bundle.js文件没有真正的生成，而是在8080端口虚拟生成
-    publicPath: "xuni"
   },
   // 配置一下webpack-dev-server
   devServer: {
@@ -18,5 +16,7 @@ module.exports = {
     compress: false,
     // 端口号
     port: 8080,
+    // 虚拟打包的路径，bundle.js文件没有真正的生成
+    publicPath: "/xuni/"
   }
 }
