@@ -1,15 +1,27 @@
-// 真正创建节点，将vnode创建为DOM，插入到pivot这个元素之前
-export default function (vnode, pivot) {
-  console.log('把虚拟节点', vnode, '插入到标杆', pivot, '前');
-  // 创建一个DOM节点，这个节点现在还是孤儿节点
-  let domNode = document.createElement(vnode.sel);
-  // 有子节点还是有文本??
-  if(vnode.text != '' && (vnode.children == undefined || vnode.children.length == 0)) {
-    // 它内部是文字
+//真正创建节点.将vnode创建为DOM
+export default function createElement(vnode){
+  //创建一个DOM节点，现在这个节点还是孤儿节点，不进行插入
+  let domNode = document.createElement(vnode.sel)
+  //有子节点还是有文本
+  if(vnode.text != '' && (vnode.children == undefined || vnode.children.length == 0)){
+    //文本
     domNode.innerText = vnode.text;
-    // 将孤儿节点上树,让标杆节点的父元素调用insertBefore方法，将新的孤儿节点插入到标签节点之前
-    pivot.parentNode.document.insertBefore(domNode, pivot);
-  } else if(ArrayBuffer.isArray(vnode.children) && vnode.children.length > 0) {
     
+  }else if(Array.isArray(vnode.children) && vnode.children.length > 0){
+    //内部是子节点，就要递归创建节点
+    for(let i =0 ;i<vnode.children.length;i++){
+      //得到当前这个children
+      let children = vnode.children[i];
+      console.log(children);
+      //创建出它的DOM，一旦调用createElement意味着：创建出DOM了，并且他的elm属性指向了
+      //创建出的DOM，但是还没有上树，是一个孤儿节点
+      let chDOM = createElement(children);
+      //上树
+      domNode.appendChild(chDOM)
+    }
   }
-};
+  //补充elm属性
+  vnode.elm = domNode;
+  //返回elem，elm属性是个纯DOM对象
+  return vnode.elm;
+}

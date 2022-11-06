@@ -13,6 +13,12 @@ export default function(oldVnode, newVnode) {
   } else {
     console.log('暴力插入新的，删除旧的');
     // 需要.elm得到  
-    createElement(newVnode, oldVnode.elm);
+    let newVnodeElm = createElement(newVnode);
+    if(oldVnode.elm.parentNode && newVnodeElm) {
+      // 插入到老节点之前
+      oldVnode.elm.parentNode.insertBefore(newVnodeElm, oldVnode.elm);
+    }
+    // 删除老节点
+    oldVnode.elm.parentNode.removeChild(oldVnode.elm);
   }
 }
