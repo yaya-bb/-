@@ -44,6 +44,8 @@ export default function patchVnode(oldVnode, newVnode) {
           } else {
             // 让处理的节点指针下移
             un++;
+            // 存在但是位置也需判断
+            
           }
         }
       } else {
