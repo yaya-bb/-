@@ -1,5 +1,7 @@
 import createElement from "./createElement";
+import updateChildren from "./updateChildren";
 
+// 对比同一个虚拟节点
 export default function patchVnode(oldVnode, newVnode) {
   // 精细比较
     // 判断新旧vnode是否是同一个对象
@@ -15,8 +17,7 @@ export default function patchVnode(oldVnode, newVnode) {
       // console.log('新vnode没有text属性');
       if(oldVnode.children != undefined && oldVnode.children.length > 0) {
         // 最复杂的情况：新老都有children
-        // 需要多加一个指针un
-        // 所有未处理的节点的开头
+        updateChildren(oldVnode.elm, oldVnode.children, newVnode.children);
         let un = 0;
         // 新创建的节点(newVnode.children[i].elm)插入到所有未处理的节点(oldVnode.children[un].elm)之前，而不是所有已处理节点之后
         for(let i = 0; i < newVnode.children.length; i++) {
@@ -42,10 +43,7 @@ export default function patchVnode(oldVnode, newVnode) {
               oldVnode.elm.appendChild(dom);
             }         
           } else {
-            // 让处理的节点指针下移
             un++;
-            // 存在但是位置也需判断
-            
           }
         }
       } else {
