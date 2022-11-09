@@ -51,7 +51,7 @@ export default function patchVnode(oldVnode, newVnode) {
         // 清空老的节点的内容
         oldVnode.elm.innerText = '';
         // 遍历新的vnode的子节点，创建DOM，上树
-        for(let i = 0; i < oldVnode.children.length; i++) {
+        for(let i = 0; i < newVnode.children.length; i++) {
           // vnode.children没有sel，由于children可能为数组
           let dom = createElement(newVnode.children[i]);
           oldVnode.elm.appendChild(dom);
