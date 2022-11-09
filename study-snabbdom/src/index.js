@@ -6,16 +6,19 @@ var myVnode = h('section', {}, [
   h('li', {key: 'B'}, 'B'),
   h('li', {key: 'C'}, 'C'),
   h('li', {key: 'D'}, 'D'),
+  h('li', {key: 'E'}, 'E'),
 ]);
 const container = document.getElementById('container');
 const btn = document.getElementById('btn');
 patch(container, myVnode);
 
 var myVnode1 = h('section', {}, [
+  h('li', {key: 'C'}, 'C'),
+  h('li', {key: 'M'}, 'M'),
+  h('li', {key: 'A'}, 'A'),
   h('li', {key: 'D'}, 'D'),
-  h('li', {key: 'C'}, 'CC'),
+  h('li', {key: 'E'}, 'E'),
   h('li', {key: 'B'}, 'B'),
-  h('li', {key: 'A'}, 'AA'),
 ]);
 btn.onclick = function() {
   patch(myVnode, myVnode1);
