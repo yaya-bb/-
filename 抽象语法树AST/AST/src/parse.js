@@ -22,10 +22,12 @@ export default function (templateStr) {
     if(startRegExp.test(rest)) {
       // []？表示可能有可能没有
       // 标签
+      console.log(startRegExp);
+      console.log(rest.match(startRegExp));
       let tag = rest.match(startRegExp)[1];
       // 属性
       let attrsString = rest.match(startRegExp)[2];
-      console.log(tag);
+      console.log(attrsString);
       // 将开始标记推入栈1中
       stack1.push(tag);
       // 将空数组推入栈2中
