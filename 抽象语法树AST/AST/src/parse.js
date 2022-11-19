@@ -22,12 +22,10 @@ export default function (templateStr) {
     if(startRegExp.test(rest)) {
       // []？表示可能有可能没有
       // 标签
-      console.log(startRegExp);
-      console.log(rest.match(startRegExp));
       let tag = rest.match(startRegExp)[1];
       // 属性
       let attrsString = rest.match(startRegExp)[2];
-      console.log(attrsString);
+      console.log(tag);
       // 将开始标记推入栈1中
       stack1.push(tag);
       // 将空数组推入栈2中
@@ -44,6 +42,7 @@ export default function (templateStr) {
       // 此时，tag一定是和栈1顶部是相同的
       if(tag == pop_tag) {
         let pop_arr = stack2.pop();
+        console.log(stack2, stack2.length);
         if(stack2.length > 0) {
           stack2[stack2.length - 1].children.push(pop_arr);
         }
@@ -55,6 +54,7 @@ export default function (templateStr) {
       // console.log(stack1, JSON.stringify(stack2));
     } else if(wordRegExp.test(rest)) {
       // 识别遍历到的这个字符，是不是文字，并且不能是全空
+      console.log(rest.match(wordRegExp));
       let word = rest.match(wordRegExp)[1];
       // 看word从开始到结束全是空
       if(!/^\s+$/.test(word)) {
