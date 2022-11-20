@@ -4,7 +4,7 @@ export default function parseAttrsString(attrsString) {
   // 当前是否在引号内
   let isYinhao = false;
   // 断点
-  let point = 0;
+  let index = 0;
   // 结果数组
   let result = [];
   // 遍历attrsString，而不是你想的用split()这种暴力方法
@@ -15,14 +15,14 @@ export default function parseAttrsString(attrsString) {
       isYinhao = !isYinhao;
     }else if(char == ' ' && !isYinhao) {
       // 遇见了空格，并且不在引号中
-      if(!/^\s*$/.test(attrsString.substring(point, i).trim())) {
-        result.push(attrsString.substring(point, i).trim());
-        point = i;
+      if(!/^\s*$/.test(attrsString.substring(index, i).trim())) {
+        result.push(attrsString.substring(index, i).trim());
+        index = i;
       }
     }
   }
   // 循环结束之后，最后还剩一个属性k="v"
-  result.push(attrsString.substring(point).trim());
+  result.push(attrsString.substring(index).trim());
   // 下面的代码功能是，将["k=v","k=v"]变为[{name:k, value:v},{name:k, value:v}];
   // 映射-数组的长度不会变多也不会变少
   result = result.map(item => {
