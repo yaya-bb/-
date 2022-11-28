@@ -34,17 +34,37 @@ function foo() {
 // fn()
 
 
-// 3.案例三:
-var obj1 = {
-  name: "obj1",
-  foo: function() {
-    console.log(this)
-  }
-}
+// // 3.案例三:
+// var obj1 = {
+//   name: "obj1",
+//   foo: function() {
+//     console.log(this)
+//   }
+// }
 
-var obj2 = {
-  name: "obj2",
-  bar: obj1.foo
-}
+// var obj2 = {
+//   name: "obj2",
+//   bar: obj1.foo
+// }
 
-obj2.bar()
+// obj2.bar()
+// function foo() {
+//   console.log(this);
+// }
+// var obj1 = {
+//   name: "obj1",
+//   foo: foo
+// }
+// var obj2 = {
+//   name: "obj2",
+//   obj1: obj1
+// }
+// obj2.obj1.foo();
+function foo() {
+  console.log(this);
+}
+var obj = {
+  name: "why"
+}
+var bar = foo.bind(obj);
+bar();
